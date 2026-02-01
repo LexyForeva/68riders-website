@@ -1,0 +1,2070 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>68Riders | Motorcu Topluluğu - Aksaray</title>
+    <meta name="description" content="Sokağın ruhu, yolun kardeşliği. 68Riders motorcu topluluğuna katıl.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Racing+Sans+One&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --riders-black: #0a0a0a;
+            --riders-dark: #111111;
+            --riders-gray: #1a1a1a;
+            --riders-red: #ff2d2d;
+            --riders-orange: #ff6b35;
+            --riders-yellow: #ffc107;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            background: var(--riders-black);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--riders-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--riders-red); border-radius: 4px; }
+        ::selection { background: var(--riders-red); color: white; }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 { font-family: 'Oswald', sans-serif; font-weight: 700; }
+        .gradient-text {
+            background: linear-gradient(135deg, #ff2d2d 0%, #ff6b35 50%, #ffc107 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .fire-glow {
+            text-shadow: 0 0 10px rgba(255, 45, 45, 0.8), 0 0 20px rgba(255, 107, 53, 0.6), 0 0 30px rgba(255, 193, 7, 0.4);
+        }
+        
+        /* Container */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+        @media (min-width: 768px) { .container { padding: 0 2rem; } }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+        nav.scrolled { background: rgba(10, 10, 10, 0.98); box-shadow: 0 4px 20px rgba(255, 45, 45, 0.1); }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; }
+        .logo-text { font-size: 1.25rem; font-weight: 700; color: white; transition: color 0.3s; }
+        .logo:hover .logo-text { color: var(--riders-red); }
+        .nav-links { display: none; gap: 2rem; }
+        @media (min-width: 1024px) { .nav-links { display: flex; } }
+        .nav-link {
+            color: #9ca3af;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-link:hover { color: white; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--riders-red);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 12px;
+            min-width: 48px;
+            min-height: 48px;
+            justify-content: center;
+            align-items: center;
+        }
+        @media (min-width: 1024px) { .mobile-menu-btn { display: none; } }
+        .mobile-menu-btn span { width: 24px; height: 2px; background: white; transition: all 0.3s; }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            transition: right 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        .mobile-menu a:hover { color: var(--riders-red); }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            font-family: 'Oswald', sans-serif;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--riders-red), var(--riders-orange));
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 45, 45, 0.5);
+        }
+        .btn-outline {
+            border: 2px solid var(--riders-red);
+            color: var(--riders-red);
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background: var(--riders-red);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Cards */
+        .card {
+            background: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+        @media (min-width: 768px) { .card { padding: 2rem; } }
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 45, 45, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .card:hover::before { opacity: 1; }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 45, 45, 0.3);
+            box-shadow: 0 20px 40px rgba(255, 45, 45, 0.2);
+        }
+        
+        /* Grid */
+        .grid { display: grid; gap: 2rem; }
+        .grid-2 { grid-template-columns: repeat(1, 1fr); }
+        @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
+        .grid-3 { grid-template-columns: repeat(1, 1fr); }
+        @media (min-width: 768px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+        .grid-4 { grid-template-columns: repeat(1, 1fr); }
+        @media (min-width: 768px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 1rem 80px;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(255, 45, 45, 0.1), rgba(10, 10, 10, 0.9));
+            z-index: 0;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255,45,45,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,45,45,0.1) 1px, transparent 1px);
+            background-size: 100px 100px;
+            opacity: 0.1;
+        }
+        .hero-content { position: relative; z-index: 10; max-width: 1200px; padding: 0 1rem; }
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 45, 45, 0.1);
+            border: 1px solid rgba(255, 45, 45, 0.3);
+            border-radius: 9999px;
+            color: var(--riders-red);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            font-family: 'Racing Sans One', cursive;
+        }
+        @media (min-width: 768px) { .hero-title { font-size: 4rem; } }
+        @media (min-width: 1024px) { .hero-title { font-size: 6rem; } }
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #9ca3af;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        @media (min-width: 768px) { .hero-subtitle { font-size: 1.25rem; } }
+        @media (min-width: 1024px) { .hero-subtitle { font-size: 1.5rem; } }
+        
+        /* Sections */
+        section { padding: 3rem 0; position: relative; }
+        @media (min-width: 768px) { section { padding: 5rem 0; } }
+        .section-title { font-size: 2rem; text-align: center; margin-bottom: 2rem; }
+        @media (min-width: 768px) { .section-title { font-size: 3rem; margin-bottom: 3rem; } }
+        @media (min-width: 1024px) { .section-title { font-size: 4rem; } }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: var(--riders-dark);
+            border: 1px solid var(--riders-gray);
+            border-radius: 1rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background: var(--riders-dark);
+            border-bottom: 1px solid var(--riders-gray);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+        }
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--riders-gray);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .modal-close:hover { background: var(--riders-red); transform: rotate(90deg); }
+        .modal-body { padding: 1.5rem; }
+        
+        /* Page Content */
+        .page-content { display: none; padding-top: 80px; }
+        .page-content.active { display: block; }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--riders-black);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4rem 0 2rem;
+        }
+        .footer-content { display: grid; gap: 3rem; margin-bottom: 3rem; }
+        @media (min-width: 768px) { .footer-content { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .footer-content { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+        .footer-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--riders-red); }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        .social-links { display: flex; gap: 1rem; }
+        .social-link {
+            width: 48px;
+            height: 48px;
+            background: var(--riders-gray);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        .social-link:hover {
+            background: var(--riders-red);
+            color: white;
+            transform: translateY(-4px);
+        }
+        
+        /* Utility */
+        .text-center { text-align: center; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mb-6 { margin-bottom: 3rem; }
+        .mt-4 { margin-top: 2rem; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <img src="https://i.imgur.com/eOcxmye.jpeg" alt="68Riders" class="logo-img" onerror="this.style.display='none'">
+                <div>
+                    <div class="logo-text">68RIDERS</div>
+                    <div style="font-size: 0.625rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.3em;">Motorcu Topluluğu</div>
+                </div>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#" class="nav-link" onclick="showPage('home')">Ana Sayfa</a>
+                <a href="#" class="nav-link" onclick="showPage('hakkimizda')">Biz Kimiz</a>
+                <a href="#" class="nav-link" onclick="showPage('uyeler')">Üyelerimiz</a>
+                <a href="#" class="nav-link" onclick="showPage('faaliyetler')">Faaliyetler</a>
+                <a href="#" class="nav-link" onclick="showPage('egitim')">Eğitim</a>
+                <a href="#" class="nav-link" onclick="showPage('sozluk')">Motor Sözlüğü</a>
+                <a href="#" class="nav-link" onclick="showPage('surus-isaretleri')">Sürüş İşaretleri</a>
+                <a href="#" class="nav-link" onclick="showPage('ilk-yardim')">İlk Yardım</a>
+                <a href="#" class="nav-link" onclick="showPage('kurallarimiz')">Kurallarımız</a>
+                <a href="#" class="nav-link" onclick="showPage('galeri')">Galeri</a>
+                <a href="#" class="nav-link" onclick="showPage('iletisim')">İletişim</a>
+            </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" onclick="showPage('home'); toggleMobileMenu()">Ana Sayfa</a>
+        <a href="#" onclick="showPage('hakkimizda'); toggleMobileMenu()">Biz Kimiz</a>
+        <a href="#" onclick="showPage('uyeler'); toggleMobileMenu()">Üyelerimiz</a>
+        <a href="#" onclick="showPage('faaliyetler'); toggleMobileMenu()">Faaliyetler</a>
+        <a href="#" onclick="showPage('egitim'); toggleMobileMenu()">Eğitim</a>
+        <a href="#" onclick="showPage('sozluk'); toggleMobileMenu()">Motor Sözlüğü</a>
+        <a href="#" onclick="showPage('surus-isaretleri'); toggleMobileMenu()">Sürüş İşaretleri</a>
+        <a href="#" onclick="showPage('ilk-yardim'); toggleMobileMenu()">İlk Yardım</a>
+        <a href="#" onclick="showPage('kurallarimiz'); toggleMobileMenu()">Kurallarımız</a>
+        <a href="#" onclick="showPage('galeri'); toggleMobileMenu()">Galeri</a>
+        <a href="#" onclick="showPage('iletisim'); toggleMobileMenu()">İletişim</a>
+    </div>
+
+    
+    <!-- ========== HOME PAGE ========== -->
+    <div id="page-home" class="page-content active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            
+            <!-- Floating Elements -->
+            <div style="position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none;">
+                <div style="position: absolute; top: 25%; left: 40px; width: 128px; height: 128px; border: 1px solid rgba(255, 45, 45, 0.2); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
+                <div style="position: absolute; bottom: 25%; right: 40px; width: 192px; height: 192px; border: 1px solid rgba(255, 107, 53, 0.2); border-radius: 50%; animation: float 8s ease-in-out infinite reverse;"></div>
+            </div>
+            
+            <div class="hero-content fade-in">
+                <span class="hero-badge">Aksaray Motorcu Topluluğu</span>
+                <h1 class="hero-title">
+                    <div style="color: white;">SOKAĞIN</div>
+                    <div class="gradient-text fire-glow">RUHU</div>
+                    <div style="font-size: 0.7em; margin-top: 1rem; color: white;">YOLUN KARDEŞLİĞİ</div>
+                </h1>
+                <p class="hero-subtitle">
+                    68Riders, sadece bir motorcu grubu değil. 
+                    <span style="color: white;">Bir aile, bir yaşam biçimi, bir tutku.</span>
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center; justify-content: center; margin-top: 3rem;">
+                    <a href="#" onclick="showPage('iletisim')" class="btn btn-primary">Aramıza Katıl</a>
+                    <a href="#" onclick="showPage('hakkimizda')" class="btn btn-outline">Bizi Tanı</a>
+                </div>
+                
+                <!-- Scroll Indicator -->
+                <div style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);">
+                    <div style="width: 24px; height: 40px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 20px; display: flex; justify-content: center; padding-top: 8px;">
+                        <div style="width: 6px; height: 6px; background: var(--riders-red); border-radius: 50%; animation: float 1.5s ease-in-out infinite;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stats Section -->
+        <section style="padding: 5rem 0; background: var(--riders-dark); position: relative;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(255, 45, 45, 0.05), transparent, rgba(255, 107, 53, 0.05));"></div>
+            <div class="container" style="position: relative; z-index: 10;">
+                <div class="grid grid-4">
+                    <div class="text-center fade-in">
+                        <div style="font-size: 4rem; margin-bottom: 1rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'">🏍️</div>
+                        <div style="font-size: 4rem; font-weight: 700; margin-bottom: 0.5rem;" class="gradient-text">20</div>
+                        <div style="color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Aktif Üye</div>
+                    </div>
+                    <div class="text-center fade-in">
+                        <div style="font-size: 4rem; margin-bottom: 1rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'">🔥</div>
+                        <div style="font-size: 4rem; font-weight: 700; margin-bottom: 0.5rem;" class="gradient-text">2</div>
+                        <div style="color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Etkinlik</div>
+                    </div>
+                    <div class="text-center fade-in">
+                        <div style="font-size: 4rem; margin-bottom: 1rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'">🛣️</div>
+                        <div style="font-size: 4rem; font-weight: 700; margin-bottom: 0.5rem;" class="gradient-text">2000</div>
+                        <div style="color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Kilometre</div>
+                    </div>
+                    <div class="text-center fade-in">
+                        <div style="font-size: 4rem; margin-bottom: 1rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.25)'" onmouseout="this.style.transform='scale(1)'">❤️</div>
+                        <div style="font-size: 4rem; font-weight: 700; margin-bottom: 0.5rem;" class="gradient-text">1</div>
+                        <div style="color: #9ca3af; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Aile</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Manifesto Section -->
+        <section style="padding: 8rem 0;">
+            <div class="container">
+                <div class="grid grid-2" style="align-items: center; gap: 4rem;">
+                    <div class="fade-in">
+                        <div style="position: relative; aspect-ratio: 1; background: var(--riders-gray); border-radius: 1rem; overflow: hidden;">
+                            <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 45, 45, 0.2), transparent); z-index: 10;"></div>
+                            <img src="https://i.imgur.com/eOcxmye.jpeg" alt="68Riders" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
+                            <div style="position: absolute; top: 16px; left: 16px; width: 80px; height: 80px; border-left: 2px solid rgba(255, 45, 45, 0.5); border-top: 2px solid rgba(255, 45, 45, 0.5); z-index: 20;"></div>
+                            <div style="position: absolute; bottom: 16px; right: 16px; width: 80px; height: 80px; border-right: 2px solid rgba(255, 45, 45, 0.5); border-bottom: 2px solid rgba(255, 45, 45, 0.5); z-index: 20;"></div>
+                        </div>
+                        <div style="position: relative; margin-top: -24px; margin-right: -24px; float: right; background: var(--riders-red); padding: 0.75rem 1.5rem; border-radius: 8px; box-shadow: 0 20px 40px rgba(255, 45, 45, 0.3); animation: float 3s ease-in-out infinite;">
+                            <span style="font-weight: 700; color: white; text-transform: uppercase;">Since 2025</span>
+                        </div>
+                    </div>
+                    
+                    <div class="fade-in">
+                        <span style="color: var(--riders-red); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Manifesto</span>
+                        <h2 style="font-size: 3rem; margin: 1rem 0 2rem;">
+                            BİZ <span class="gradient-text">68RIDERS</span>
+                        </h2>
+                        <div style="color: #d1d5db; font-size: 1.125rem; line-height: 1.8;">
+                            <p style="margin-bottom: 1.5rem;">
+                                <span style="color: white; font-weight: 500;">31 Aralık 2025</span> tarihinde Aksaray'da kurulan 68Riders, 
+                                motorcu kültürünü kardeşlik ve güvenli sürüş ilkeleriyle birleştiren bir topluluktur.
+                            </p>
+                            <p style="margin-bottom: 1.5rem;">
+                                Topluluğumuzun temeli <span style="color: var(--riders-red);">kardeşlik, saygı ve dayanışma</span> üzerine kuruludur. 
+                                Motor tutkumuzu paylaşan insanları bir araya getirerek, Aksaray'da kaliteli vakit geçirebileceğimiz 
+                                sosyal bir ortam yaratmayı hedefledik.
+                            </p>
+                            <p style="margin-bottom: 1.5rem;">
+                                68Riders olarak amacımız, düzenli etkinlikler ve sürüşler organize ederek üyelerimiz arasında güçlü bir bağ oluşturmak 
+                                ve motor sporlarını <span style="color: white; font-weight: 500;">güvenli, sorumlu bir şekilde</span> yaşamaktır.
+                            </p>
+                            <p>
+                                Bugün 20 üyeyle başladığımız bu yolculukta, her üyemiz ailemizin değerli bir parçasıdır. 
+                                <span style="color: white; font-weight: 500;">Birlikte daha güçlüyüz.</span>
+                            </p>
+                        </div>
+                        <div style="margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: #9ca3af;">
+                                <span style="width: 8px; height: 8px; background: var(--riders-red); border-radius: 50%;"></span>
+                                Kardeşlik
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: #9ca3af;">
+                                <span style="width: 8px; height: 8px; background: var(--riders-orange); border-radius: 50%;"></span>
+                                Güvenli Sürüş
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: #9ca3af;">
+                                <span style="width: 8px; height: 8px; background: var(--riders-yellow); border-radius: 50%;"></span>
+                                Tutku
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: #9ca3af;">
+                                <span style="width: 8px; height: 8px; background: white; border-radius: 50%;"></span>
+                                Özgürlük
+                            </div>
+                        </div>
+                        <a href="#" onclick="showPage('hakkimizda')" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 2.5rem; color: var(--riders-red); text-decoration: none; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--riders-red)'">
+                            <span>Hikayemizi Oku</span>
+                            <svg style="width: 20px; height: 20px; transition: transform 0.3s;" fill="none" stroke="currentColor" viewBox="0 0 24 24" onmouseover="this.style.transform='translateX(8px)'" onmouseout="this.style.transform='translateX(0)'">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Activities Preview -->
+        <section style="padding: 8rem 0; background: var(--riders-dark); position: relative; overflow: hidden;">
+            <div style="position: absolute; inset: 0; opacity: 0.05;">
+                <div style="position: absolute; inset: 0; background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+            </div>
+            
+            <div class="container" style="position: relative; z-index: 10;">
+                <div class="text-center mb-6">
+                    <span style="color: var(--riders-red); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Ne Yapıyoruz</span>
+                    <h2 class="section-title">
+                        <span class="gradient-text">FAALİYETLER</span>
+                    </h2>
+                    <p style="font-size: 3.5rem; font-weight: 700; margin-top: 2rem;" class="gradient-text">ÇOK YAKINDA</p>
+                </div>
+                
+                <div class="grid grid-4">
+                    <div class="card text-center" style="opacity: 0.6; cursor: pointer;">
+                        <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; border-radius: 12px; background: var(--riders-gray); display: flex; align-items: center; justify-content: center; font-size: 2rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">🏍️</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.75rem;">Haftalık Sürüşler</h3>
+                        <p style="color: #9ca3af; font-size: 0.875rem; line-height: 1.6;">Her hafta sonu farklı rotalar, yeni keşifler.</p>
+                    </div>
+                    <div class="card text-center" style="opacity: 0.6; cursor: pointer;">
+                        <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; border-radius: 12px; background: var(--riders-gray); display: flex; align-items: center; justify-content: center; font-size: 2rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">🎓</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.75rem;">Eğitim Kampları</h3>
+                        <p style="color: #9ca3af; font-size: 0.875rem; line-height: 1.6;">Güvenli sürüş teknikleri ve motor bakımı.</p>
+                    </div>
+                    <div class="card text-center" style="opacity: 0.6; cursor: pointer;">
+                        <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; border-radius: 12px; background: var(--riders-gray); display: flex; align-items: center; justify-content: center; font-size: 2rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">🎉</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.75rem;">Sosyal Etkinlikler</h3>
+                        <p style="color: #9ca3af; font-size: 0.875rem; line-height: 1.6;">Buluşmalar, festivaller ve kardeşlik geceleri.</p>
+                    </div>
+                    <div class="card text-center" style="opacity: 0.6; cursor: pointer;">
+                        <div style="width: 64px; height: 64px; margin: 0 auto 1.5rem; border-radius: 12px; background: var(--riders-gray); display: flex; align-items: center; justify-content: center; font-size: 2rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">❤️</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.75rem;">Yardım Organizasyonları</h3>
+                        <p style="color: #9ca3af; font-size: 0.875rem; line-height: 1.6;">Topluma katkı, sosyal sorumluluk projeleri.</p>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 3rem;">
+                    <a href="#" onclick="showPage('faaliyetler')" class="btn btn-outline">
+                        Detaylı Bilgi
+                        <svg style="width: 20px; height: 20px; display: inline-block; margin-left: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section style="padding: 8rem 0; position: relative; overflow: hidden;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 45, 45, 0.2), rgba(10, 10, 10, 0.9), rgba(255, 107, 53, 0.2));"></div>
+            <div style="position: absolute; top: 0; left: 25%; width: 384px; height: 384px; background: rgba(255, 45, 45, 0.3); border-radius: 50%; filter: blur(150px);"></div>
+            <div style="position: absolute; bottom: 0; right: 25%; width: 384px; height: 384px; background: rgba(255, 107, 53, 0.3); border-radius: 50%; filter: blur(150px);"></div>
+            
+            <div style="position: absolute; inset: 0; opacity: 0.05;">
+                <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,45,45,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,45,45,0.3) 1px, transparent 1px); background-size: 60px 60px;"></div>
+            </div>
+            
+            <div class="container" style="position: relative; z-index: 10; text-align: center; max-width: 1000px;">
+                <div style="width: 96px; height: 96px; margin-bottom: 2rem; border-radius: 1rem; background: linear-gradient(135deg, var(--riders-red), var(--riders-orange)); display: flex; align-items: center; justify-content: center; font-size: 3rem; box-shadow: 0 20px 40px rgba(255, 45, 45, 0.3); animation: float 3s ease-in-out infinite;">🏍️</div>
+                
+                <h2 style="font-size: 3rem; font-weight: 700; margin-bottom: 1.5rem; color: white;">HAZIR MISIN?</h2>
+                <p style="font-size: 1.5rem; color: #d1d5db; margin-bottom: 1rem;">68Riders ailesine katıl,</p>
+                <p style="font-size: 2.5rem; font-weight: 700; margin-bottom: 3rem;" class="gradient-text">YOLLARA BİRLİKTE ÇIKALIM</p>
+                
+                <a href="#" onclick="showPage('iletisim')" style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 1.25rem 3rem; background: linear-gradient(to right, var(--riders-red), var(--riders-orange)); color: white; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 8px; text-decoration: none; box-shadow: 0 20px 40px rgba(255, 45, 45, 0.3); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    Bize Ulaş
+                </a>
+                
+                <div style="margin-top: 3rem; display: flex; align-items: center; justify-content: center;">
+                    <a href="https://instagram.com/68_riders" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; color: #9ca3af; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--riders-red)'" onmouseout="this.style.color='#9ca3af'">
+                        <svg style="width: 24px; height: 24px; transition: transform 0.3s;" fill="currentColor" viewBox="0 0 24 24" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+                            <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        <span style="font-size: 0.875rem; font-weight: 500;">@68_riders</span>
+                    </a>
+                </div>
+                
+                <p style="margin-top: 3rem; color: #6b7280; font-size: 0.875rem;">Sorularınız için bize ulaşın. Her zaman yanıtlamaktan mutluluk duyarız.</p>
+            </div>
+            
+            <!-- Floating Elements -->
+            <div style="position: absolute; top: 80px; left: 40px; width: 128px; height: 128px; border: 2px solid rgba(255, 45, 45, 0.2); border-radius: 50%; animation: float 8s ease-in-out infinite;"></div>
+            <div style="position: absolute; bottom: 80px; right: 40px; width: 192px; height: 192px; border: 2px solid rgba(255, 107, 53, 0.2); border-radius: 50%; animation: float 10s ease-in-out infinite reverse;"></div>
+        </section>
+    </div>
+
+    
+    <!-- ========== HAKKIMIZDA PAGE ========== -->
+    <div id="page-hakkimizda" class="page-content">
+        <section class="hero" style="min-height: 60vh;">
+            <div class="hero-bg"></div>
+            <div class="hero-content fade-in">
+                <span class="hero-badge">Hikayemiz</span>
+                <h1 class="hero-title">BİZ <span class="gradient-text">68RIDERS</span></h1>
+                <p class="hero-subtitle">Aksaray'ın kalbinden doğan, Türkiye'nin dört bir yanına uzanan bir motorcu kardeşliği. Sadece sürmüyoruz, yaşıyoruz.</p>
+            </div>
+        </section>
+        
+        <section style="padding: 8rem 0; background: var(--riders-dark);">
+            <div class="container">
+                <div class="text-center mb-6">
+                    <span style="color: var(--riders-red); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Yolculuğumuz</span>
+                    <h2 class="section-title"><span class="gradient-text">HİKAYEMİZ</span></h2>
+                </div>
+                
+                <div style="position: relative; max-width: 800px; margin: 0 auto;">
+                    <!-- Timeline vertical line -->
+                    <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--riders-red), var(--riders-orange), var(--riders-yellow)); transform: translateX(-50%);"></div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 6rem;">
+                        <!-- Timeline Item 1 - Left -->
+                        <div style="position: relative; display: flex; align-items: center;">
+                            <div style="flex: 1; text-align: right; padding-right: 3rem;">
+                                <div class="card" style="display: inline-block; text-align: left; max-width: 400px;">
+                                    <span style="color: var(--riders-red); font-size: 1.25rem; font-weight: 700;">31 Aralık 2025</span>
+                                    <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin: 0.5rem 0 1rem;">Kuruluş</h3>
+                                    <p style="color: #9ca3af; line-height: 1.8;">Yılın son gününde, yeni yıla bomba gibi girmek için 68Riders'ı kurduk. Aksaray'ın sokaklarında yeni bir kardeşlik doğdu.</p>
+                                </div>
+                            </div>
+                            <div style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 10; width: 16px; height: 16px; background: var(--riders-red); border-radius: 50%; border: 4px solid var(--riders-dark);"></div>
+                            <div style="flex: 1;"></div>
+                        </div>
+                        
+                        <!-- Timeline Item 2 - Right -->
+                        <div style="position: relative; display: flex; align-items: center;">
+                            <div style="flex: 1;"></div>
+                            <div style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 10; width: 16px; height: 16px; background: var(--riders-orange); border-radius: 50%; border: 4px solid var(--riders-dark);"></div>
+                            <div style="flex: 1; padding-left: 3rem;">
+                                <div class="card" style="max-width: 400px;">
+                                    <span style="color: var(--riders-orange); font-size: 1.25rem; font-weight: 700;">Ocak 2026</span>
+                                    <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin: 0.5rem 0 1rem;">Hızlı Büyüme</h3>
+                                    <p style="color: #9ca3af; line-height: 1.8;">İlk günden itibaren hızla büyüdük. Motor tutkusunu paylaşan kardeşler, dostlar aramıza katıldı. Aile büyüdü.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Timeline Item 3 - Left -->
+                        <div style="position: relative; display: flex; align-items: center;">
+                            <div style="flex: 1; text-align: right; padding-right: 3rem;">
+                                <div class="card" style="display: inline-block; text-align: left; max-width: 400px;">
+                                    <span style="color: var(--riders-yellow); font-size: 1.25rem; font-weight: 700;">Şubat 2026</span>
+                                    <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin: 0.5rem 0 1rem;">Kardeşlik</h3>
+                                    <p style="color: #9ca3af; line-height: 1.8;">Birçok kardeş edindik, dost edindik. Her sürüşte, her buluşmada bağlarımız güçlendi. Sadece motorcu değil, aile olduk.</p>
+                                </div>
+                            </div>
+                            <div style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 10; width: 16px; height: 16px; background: var(--riders-yellow); border-radius: 50%; border: 4px solid var(--riders-dark);"></div>
+                            <div style="flex: 1;"></div>
+                        </div>
+                        
+                        <!-- Timeline Item 4 - Right -->
+                        <div style="position: relative; display: flex; align-items: center;">
+                            <div style="flex: 1;"></div>
+                            <div style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 10; width: 16px; height: 16px; background: white; border-radius: 50%; border: 4px solid var(--riders-dark);"></div>
+                            <div style="flex: 1; padding-left: 3rem;">
+                                <div class="card" style="max-width: 400px;">
+                                    <span style="color: white; font-size: 1.25rem; font-weight: 700;">Bugün</span>
+                                    <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin: 0.5rem 0 1rem;">Büyümeye Devam</h3>
+                                    <p style="color: #9ca3af; line-height: 1.8;">20 üye, 2 etkinlik, 2000 kilometre ve halen büyüyoruz. Yolculuğumuz daha yeni başladı, hedeflerimiz büyük.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section style="padding: 8rem 0;">
+            <div class="container">
+                <div class="text-center mb-6">
+                    <span style="color: var(--riders-red); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">İlkelerimiz</span>
+                    <h2 class="section-title"><span class="gradient-text">DEĞERLERİMİZ</span></h2>
+                </div>
+                
+                <div class="grid grid-3">
+                    <div class="card text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🤝</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 1rem;">Kardeşlik</h3>
+                        <p style="color: #9ca3af; line-height: 1.6;">Yolda birbirimizi asla yalnız bırakmayız. Bir 68Rider düştüğünde, hepimiz durur.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🛡️</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 1rem;">Güvenlik</h3>
+                        <p style="color: #9ca3af; line-height: 1.6;">Hız değil, güvenli sürüş. Koruyucu ekipman ve eğitim bizim için vazgeçilmez.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🔥</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 1rem;">Tutku</h3>
+                        <p style="color: #9ca3af; line-height: 1.6;">Motosiklet bizim için sadece bir araç değil, yaşam biçimi ve özgürlük sembolü.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🎯</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 1rem;">Disiplin</h3>
+                        <p style="color: #9ca3af; line-height: 1.6;">Kurallara saygı, birbirimize saygı. Topluluk olarak hareket ederiz.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">💪</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 1rem;">Gelişim</h3>
+                        <p style="color: #9ca3af; line-height: 1.6;">Sürekli öğrenme, sürekli gelişme. Eğitimlerle kendimizi geliştiririz.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">❤️</div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 1rem;">Sosyal Sorumluluk</h3>
+                        <p style="color: #9ca3af; line-height: 1.6;">Topluma katkı sağlamak, yardım organizasyonları düzenlemek bizim için önemli.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    
+    <!-- ========== UYELER PAGE ========== -->
+    <div id="page-uyeler" class="page-content">
+        <section class="hero" style="min-height: 60vh;">
+            <div class="hero-bg"></div>
+            <div class="hero-content fade-in">
+                <span class="hero-badge" style="background: rgba(255, 107, 53, 0.1); border-color: rgba(255, 107, 53, 0.3); color: var(--riders-orange);">68Riders Ailesi</span>
+                <h1 class="hero-title"><span class="gradient-text">ÜYELERİMİZ</span></h1>
+                <p class="hero-subtitle">Yolda birlikte, hayatta kardeş. 68Riders ailesinin değerli üyeleri.</p>
+            </div>
+        </section>
+        
+        <section style="padding: 8rem 0; background: var(--riders-dark);">
+            <div class="container">
+                <div class="text-center mb-6">
+                    <span style="color: var(--riders-orange); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Ailemiz</span>
+                    <h2 class="section-title mb-4"><span class="gradient-text">25 KARDEŞ</span></h2>
+                    <p style="color: #9ca3af;">Her biri değerli, her biri bu ailenin vazgeçilmez parçası.</p>
+                </div>
+                
+                <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem;" id="membersGrid">
+                    <!-- Üyeler JavaScript ile yüklenecek -->
+                </div>
+                
+                <div class="text-center mt-6">
+                    <div style="display: inline-block; padding: 1rem 1.5rem; background: var(--riders-gray); border-radius: 12px;">
+                        <p style="color: #9ca3af;">
+                            <span style="color: var(--riders-orange); font-weight: 700; font-size: 1.5rem;">25</span>
+                            <span style="color: white; margin-left: 0.5rem;">Kardeş, Bir Aile</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    
+    <!-- ========== EGITIM PAGE ========== -->
+    <div id="page-egitim" class="page-content">
+        <section class="hero" style="min-height: 60vh;">
+            <div class="hero-bg"></div>
+            <div class="hero-content fade-in">
+                <span class="hero-badge" style="background: rgba(255, 193, 7, 0.1); border-color: rgba(255, 193, 7, 0.3); color: var(--riders-yellow);">68Riders Akademi</span>
+                <h1 class="hero-title"><span class="gradient-text">68 RIDERS AKADEMİYE</span></h1>
+                <h2 style="font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 2rem;">HOŞGELDİNİZ</h2>
+                <p class="hero-subtitle">Motorunuzu daha iyi tanıyın, bakımını kendiniz yapın, yolda daha güvenli olun. Temel motor bilgilerinden ileri seviye tekniklere kadar her şey burada.</p>
+            </div>
+        </section>
+        
+        <section style="padding: 8rem 0; background: var(--riders-dark);">
+            <div class="container">
+                <div class="text-center mb-6">
+                    <span style="color: var(--riders-red); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Eğitim Konuları</span>
+                    <h2 class="section-title"><span class="gradient-text">MOTORCULUK BİLGİLERİ</span></h2>
+                    <p style="color: #9ca3af; max-width: 800px; margin: 0 auto;">Motorunuzu daha iyi tanıyın, bakımını kendiniz yapın. Temel bilgilerden ileri seviyeye.</p>
+                </div>
+                
+                <div class="grid grid-3">
+                    <div class="card" style="cursor: pointer;" onclick="openModal('rodaj')">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🔧</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.25rem; font-weight: 700; color: white;">Rodaj</h3>
+                            <span style="padding: 0.25rem 0.5rem; background: rgba(255, 193, 7, 0.2); color: var(--riders-yellow); font-size: 0.75rem; border-radius: 4px;">Başlangıç</span>
+                        </div>
+                        <p style="color: #9ca3af; line-height: 1.6; margin-bottom: 1.5rem;">Yeni motorunuzun ilk kilometreleri. Doğru rodaj teknikleri ve dikkat edilmesi gerekenler.</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.875rem;">
+                            <span style="color: #6b7280;"><span style="color: white; font-weight: 500;">5</span> Konu</span>
+                            <span style="color: var(--riders-yellow);">📚 Ücretsiz</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="cursor: pointer;" onclick="openModal('yag')">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🛢️</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.25rem; font-weight: 700; color: white;">Yağ Bakımı</h3>
+                            <span style="padding: 0.25rem 0.5rem; background: rgba(255, 193, 7, 0.2); color: var(--riders-yellow); font-size: 0.75rem; border-radius: 4px;">Temel</span>
+                        </div>
+                        <p style="color: #9ca3af; line-height: 1.6; margin-bottom: 1.5rem;">Motor yağı değişimi, yağ seçimi, filtre değişimi. Kendiniz yapın, para tasarrufu sağlayın.</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.875rem;">
+                            <span style="color: #6b7280;"><span style="color: white; font-weight: 500;">8</span> Konu</span>
+                            <span style="color: var(--riders-yellow);">📚 Ücretsiz</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="cursor: pointer;" onclick="openModal('lastik')">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🛞</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.25rem; font-weight: 700; color: white;">Lastik Bakımı</h3>
+                            <span style="padding: 0.25rem 0.5rem; background: rgba(255, 193, 7, 0.2); color: var(--riders-yellow); font-size: 0.75rem; border-radius: 4px;">Temel</span>
+                        </div>
+                        <p style="color: #9ca3af; line-height: 1.6; margin-bottom: 1.5rem;">Lastik basıncı, aşınma kontrolü, lastik değişimi. Güvenli sürüşün temeli.</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.875rem;">
+                            <span style="color: #6b7280;"><span style="color: white; font-weight: 500;">6</span> Konu</span>
+                            <span style="color: var(--riders-yellow);">📚 Ücretsiz</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="cursor: pointer;" onclick="openModal('fren')">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🔴</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.25rem; font-weight: 700; color: white;">Fren Sistemi</h3>
+                            <span style="padding: 0.25rem 0.5rem; background: rgba(255, 193, 7, 0.2); color: var(--riders-yellow); font-size: 0.75rem; border-radius: 4px;">Orta</span>
+                        </div>
+                        <p style="color: #9ca3af; line-height: 1.6; margin-bottom: 1.5rem;">Fren balatası kontrolü, fren hidroliği, ABS sistemi. Hayat kurtaran bilgiler.</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.875rem;">
+                            <span style="color: #6b7280;"><span style="color: white; font-weight: 500;">7</span> Konu</span>
+                            <span style="color: var(--riders-yellow);">📚 Ücretsiz</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="cursor: pointer;" onclick="openModal('zincir')">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">⚙️</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.25rem; font-weight: 700; color: white;">Zincir Bakımı</h3>
+                            <span style="padding: 0.25rem 0.5rem; background: rgba(255, 193, 7, 0.2); color: var(--riders-yellow); font-size: 0.75rem; border-radius: 4px;">Temel</span>
+                        </div>
+                        <p style="color: #9ca3af; line-height: 1.6; margin-bottom: 1.5rem;">Zincir germe, yağlama, temizlik. Motorunuzun ömrünü uzatın.</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.875rem;">
+                            <span style="color: #6b7280;"><span style="color: white; font-weight: 500;">4</span> Konu</span>
+                            <span style="color: var(--riders-yellow);">📚 Ücretsiz</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="cursor: pointer;" onclick="openModal('guvenlik')">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🛡️</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.25rem; font-weight: 700; color: white;">Güvenlik Ekipmanı</h3>
+                            <span style="padding: 0.25rem 0.5rem; background: rgba(255, 45, 45, 0.2); color: var(--riders-red); font-size: 0.75rem; border-radius: 4px;">Zorunlu</span>
+                        </div>
+                        <p style="color: #9ca3af; line-height: 1.6; margin-bottom: 1.5rem;">Kask, eldiven, mont seçimi. Doğru ekipman, güvenli sürüş.</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.875rem;">
+                            <span style="color: #6b7280;"><span style="color: white; font-weight: 500;">4</span> Konu</span>
+                            <span style="color: var(--riders-yellow);">📚 Ücretsiz</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    
+    <!-- EGITIM MODALS -->
+    <div id="modal-rodaj" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="font-size: 3rem;">🔧</div>
+                    <div>
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: white;">Rodaj</h2>
+                        <span style="font-size: 0.875rem; color: var(--riders-yellow);">Başlangıç</span>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal('rodaj')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #d1d5db; font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Yeni motorunuzun ilk 1000-1500 kilometresi çok önemlidir. Doğru rodaj, motorunuzun ömrünü uzatır.
+                </p>
+                
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="color: var(--riders-red);">📋</span>
+                    Önemli Noktalar
+                </h3>
+                <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.75rem;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>İlk 500 km: Motor devrini 4000'in altında tutun</span>
+                    </li>
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.75rem;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>500-1000 km: Yavaş yavaş devir aralığını artırın</span>
+                    </li>
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.75rem;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>Ani gaz ve fren yapmaktan kaçının</span>
+                    </li>
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.75rem;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>İlk yağ değişimini 1000 km'de mutlaka yaptırın</span>
+                    </li>
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.75rem;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>Motor ısındıktan sonra sürüşe başlayın</span>
+                    </li>
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>Uzun süre aynı devirde gitmeyin, vites değiştirin</span>
+                    </li>
+                </ul>
+                
+                <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 12px; padding: 1rem;">
+                    <div style="display: flex; align-items: start; gap: 0.75rem;">
+                        <span style="font-size: 1.5rem;">💡</span>
+                        <div>
+                            <h4 style="font-weight: 700; color: var(--riders-yellow); margin-bottom: 0.5rem;">İpucu</h4>
+                            <p style="color: #d1d5db; font-size: 0.875rem; line-height: 1.6;">
+                                Rodaj döneminde motorunuzu zorlamayın. Sabırlı olun, motorunuz size teşekkür edecek.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 1.5rem; border-top: 1px solid var(--riders-gray); margin-top: 2rem;">
+                    <span style="color: #9ca3af; font-size: 0.875rem;">5 konu içeriği</span>
+                    <button onclick="closeModal('rodaj')" class="btn btn-primary">Anladım</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-yag" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="font-size: 3rem;">🛢️</div>
+                    <div>
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: white;">Yağ Bakımı</h2>
+                        <span style="font-size: 0.875rem; color: var(--riders-yellow);">Temel</span>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal('yag')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #d1d5db; font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Motor yağı, motorunuzun kanıdır. Düzenli yağ değişimi, motor ömrünü uzatır ve performansı artırır.
+                </p>
+                
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="color: var(--riders-red);">📋</span>
+                    Önemli Noktalar
+                </h3>
+                <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.75rem;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>Yağ değişim aralığı: 3000-5000 km veya 6 ayda bir</span>
+                    </li>
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.75rem;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>Doğru yağ seçimi: Kullanım kılavuzuna bakın (10W-40, 20W-50 vb.)</span>
+                    </li>
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.75rem;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>Sentetik vs Mineral yağ farkları</span>
+                    </li>
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.75rem;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>Yağ filtresi her yağ değişiminde mutlaka değiştirilmeli</span>
+                    </li>
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db; margin-bottom: 0.75rem;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>Motor soğukken yağ seviyesi kontrolü</span>
+                    </li>
+                    <li style="display: flex; align-items: start; gap: 0.75rem; color: #d1d5db;">
+                        <span style="color: var(--riders-red); margin-top: 0.25rem;">•</span>
+                        <span>Yağ değişimi için gerekli malzemeler ve adımlar</span>
+                    </li>
+                </ul>
+                
+                <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 12px; padding: 1rem;">
+                    <div style="display: flex; align-items: start; gap: 0.75rem;">
+                        <span style="font-size: 1.5rem;">💡</span>
+                        <div>
+                            <h4 style="font-weight: 700; color: var(--riders-yellow); margin-bottom: 0.5rem;">İpucu</h4>
+                            <p style="color: #d1d5db; font-size: 0.875rem; line-height: 1.6;">
+                                Kaliteli yağ kullanın, ucuz yağ uzun vadede pahalıya mal olur. Yağ değişimini ihmal etmeyin.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 1.5rem; border-top: 1px solid var(--riders-gray); margin-top: 2rem;">
+                    <span style="color: #9ca3af; font-size: 0.875rem;">8 konu içeriği</span>
+                    <button onclick="closeModal('yag')" class="btn btn-primary">Anladım</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Diğer modal'lar için kısa versiyonlar -->
+    
+    <!-- MEMBER MODAL -->
+    <div id="modal-member" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div id="memberModalIcon" style="font-size: 3rem;">🏍️</div>
+                    <div>
+                        <h2 id="memberModalName" style="font-size: 1.5rem; font-weight: 700; color: white;"></h2>
+                        <span id="memberModalNumber" style="font-size: 0.875rem; color: var(--riders-orange);"></span>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal('member')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <img id="memberModalImage" src="" alt="" style="width: 100%; max-width: 300px; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 2px solid var(--riders-orange);" onerror="this.style.display='none'">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--riders-gray); border-radius: 8px;">
+                        <span style="font-size: 1.5rem;">🎂</span>
+                        <span id="memberModalAge" style="color: #d1d5db;"></span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--riders-gray); border-radius: 8px;">
+                        <span style="font-size: 1.5rem;">🏍️</span>
+                        <span id="memberModalBike" style="color: #d1d5db;"></span>
+                    </div>
+                    <a id="memberModalInstagram" href="#" target="_blank" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--riders-gray); border-radius: 8px; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.background='var(--riders-red)'" onmouseout="this.style.background='var(--riders-gray)'">
+                        <span style="font-size: 1.5rem;">📸</span>
+                        <span style="color: #d1d5db;">Instagram'da Takip Et</span>
+                    </a>
+                </div>
+                <button onclick="closeModal('member')" class="btn btn-primary" style="width: 100%;">Kapat</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Diğer modal'lar -->
+    <div id="modal-lastik" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="font-size: 3rem;">🛞</div>
+                    <div><h2 style="font-size: 1.5rem; font-weight: 700; color: white;">Lastik Bakımı</h2></div>
+                </div>
+                <button class="modal-close" onclick="closeModal('lastik')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #d1d5db; margin-bottom: 1.5rem;">Lastikler, motorunuzun yol ile tek teması. Doğru bakım, güvenliğiniz için kritik öneme sahip.</p>
+                <button onclick="closeModal('lastik')" class="btn btn-primary">Anladım</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-fren" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="font-size: 3rem;">🔴</div>
+                    <div><h2 style="font-size: 1.5rem; font-weight: 700; color: white;">Fren Sistemi</h2></div>
+                </div>
+                <button class="modal-close" onclick="closeModal('fren')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #d1d5db; margin-bottom: 1.5rem;">Fren sistemi, güvenliğinizin en önemli parçası. Düzenli kontrol ve bakım hayat kurtarır.</p>
+                <button onclick="closeModal('fren')" class="btn btn-primary">Anladım</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-zincir" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="font-size: 3rem;">⚙️</div>
+                    <div><h2 style="font-size: 1.5rem; font-weight: 700; color: white;">Zincir Bakımı</h2></div>
+                </div>
+                <button class="modal-close" onclick="closeModal('zincir')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #d1d5db; margin-bottom: 1.5rem;">Zincir, motorun gücünü arka tekerleğe ileten kritik parça. Düzenli bakım şarttır.</p>
+                <button onclick="closeModal('zincir')" class="btn btn-primary">Anladım</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-guvenlik" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="font-size: 3rem;">🛡️</div>
+                    <div><h2 style="font-size: 1.5rem; font-weight: 700; color: white;">Güvenlik Ekipmanı</h2></div>
+                </div>
+                <button class="modal-close" onclick="closeModal('guvenlik')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #d1d5db; margin-bottom: 1.5rem;">Güvenlik ekipmanı, hayat kurtarır. Doğru seçim ve kullanım çok önemli. ATGATT: All The Gear, All The Time!</p>
+                <button onclick="closeModal('guvenlik')" class="btn btn-primary">Anladım</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== DİĞER SAYFALAR (Basitleştirilmiş) ========== -->
+    
+    <!-- FAALIYETLER -->
+    <div id="page-faaliyetler" class="page-content">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content fade-in">
+                <div style="font-size: 6rem; margin-bottom: 2rem; animation: float 3s ease-in-out infinite;">🏍️</div>
+                <span class="hero-badge">Faaliyetler</span>
+                <h1 style="font-size: 4rem; font-weight: 700; margin: 2rem 0;" class="gradient-text">ÇOK YAKINDA</h1>
+                <p class="hero-subtitle">68Riders olarak heyecan verici etkinlikler, eğitimler ve sürüşler planlıyoruz. Çok yakında burada olacak!</p>
+                <a href="https://instagram.com/68_riders" target="_blank" class="btn btn-primary" style="margin-top: 2rem;">📸 Bizi Takip Et</a>
+            </div>
+        </section>
+    </div>
+    
+    <!-- SOZLUK -->
+    <div id="page-sozluk" class="page-content">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content fade-in">
+                <div style="font-size: 6rem; margin-bottom: 2rem;">📚</div>
+                <span class="hero-badge" style="background: rgba(255, 193, 7, 0.1); border-color: rgba(255, 193, 7, 0.3); color: var(--riders-yellow);">Bilgi Bankası</span>
+                <h1 style="font-size: 4rem; font-weight: 700; margin: 2rem 0;" class="gradient-text">MOTOR SÖZLÜĞÜ</h1>
+                <p class="hero-subtitle">Motorsiklet dünyasında kullanılan terimleri öğren. Her motorcunun bilmesi gereken kavramlar.</p>
+            </div>
+        </section>
+        
+        <section style="padding: 4rem 0; background: var(--riders-dark);">
+            <div class="container">
+                <div class="grid grid-2">
+                    <!-- ABS -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">ABS</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Güvenlik</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Anti-lock Braking System (Kilitlenme Önleyici Fren Sistemi)</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Ani frenleme sırasında tekerleklerin kilitlenmesini önleyen elektronik sistem. Özellikle ıslak zeminde hayat kurtarır.</p>
+                    </div>
+                    
+                    <!-- CC -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">CC</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Motor</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Cubic Centimeter (Santimetre Küp)</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Motorun silindir hacmini ifade eder. Örneğin 250cc, 600cc gibi. Daha yüksek cc genellikle daha fazla güç demektir.</p>
+                    </div>
+                    
+                    <!-- Beygir Gücü -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Beygir Gücü (HP)</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Motor</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Horse Power - Motorun gücü</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Motorun ürettiği gücü ölçen birim. 1 HP = 0.746 kW. Örneğin 50 HP motor, 50 beygir gücünde demektir.</p>
+                    </div>
+                    
+                    <!-- Tork -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Tork</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Motor</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Motorun dönme kuvveti</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Motorun çekiş gücünü belirler. Yüksek tork, daha iyi ivmelenme ve rampa çıkma gücü sağlar. Nm (Newton metre) ile ölçülür.</p>
+                    </div>
+                    
+                    <!-- RPM -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">RPM</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Motor</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Revolutions Per Minute (Dakikadaki Devir)</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Motorun dakikada kaç kez döndüğünü gösterir. Redline bölgeye girmeden önce vites yükseltmek gerekir.</p>
+                    </div>
+                    
+                    <!-- Debriyaj -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Debriyaj</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Kontrol</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Motor ile şanzıman arasındaki bağlantı</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Sol koldaki kol. Vites değiştirirken ve kalkışta kullanılır. Yumuşak kullanım motor ömrünü uzatır.</p>
+                    </div>
+                    
+                    <!-- Naked -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Naked</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Motor Tipi</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Çıplak motor</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Kaportası olmayan, motorun görüldüğü sportif motorlar. Şehir içi kullanıma uygundur. Örnek: MT-07, Z650.</p>
+                    </div>
+                    
+                    <!-- Sport -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Sport</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Motor Tipi</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Yarış tipi motor</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Aerodinamik kaportası olan, yüksek performanslı motorlar. Öne eğik sürüş pozisyonu. Örnek: R6, CBR600RR.</p>
+                    </div>
+                    
+                    <!-- Cruiser -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Cruiser</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Motor Tipi</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Rahat sürüş motoru</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Ayaklar öne uzanmış, dik oturma pozisyonu. Uzun yol için rahattır. Örnek: Harley Davidson, Honda Shadow.</p>
+                    </div>
+                    
+                    <!-- Enduro -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Enduro</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Motor Tipi</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Arazi motoru</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Hem asfalt hem toprakta kullanılabilen motorlar. Yüksek süspansiyon, uzun ön çamurluk.</p>
+                    </div>
+                    
+                    <!-- Zincir -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Zincir</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Teknik</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Güç aktarım sistemi</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Motordan arka tekerleğe gücü ileten zincir. Düzenli yağlama ve germe gerektirir.</p>
+                    </div>
+                    
+                    <!-- Enjeksiyon -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Enjeksiyon</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Yakıt</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Elektronik yakıt sistemi</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Modern motorlarda kullanılan sistem. Daha verimli, soğukta kolay çalışır, ayar gerektirmez.</p>
+                    </div>
+                    
+                    <!-- Traction Control -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Traction Control</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Güvenlik</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Çekiş kontrolü</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Arka tekerleğin kaymasını önleyen elektronik sistem. Islak zeminde ve ani gazda devreye girer.</p>
+                    </div>
+                    
+                    <!-- Wheelie -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Wheelie</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Sürüş</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Ön tekerlek kaldırma</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Ani gaz ile ön tekerleğin havaya kalkması. Tehlikeli ve yasaktır, sadece kapalı alanda yapılmalı.</p>
+                    </div>
+                    
+                    <!-- Counter Steering -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Counter Steering</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Sürüş</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Ters direksiyon</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Yüksek hızda viraj alma tekniği. Sağa dönmek için gidon hafifçe sola itilir. Fizik kuralı.</p>
+                    </div>
+                    
+                    <!-- Lane Splitting -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">Lane Splitting</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Sürüş</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Şerit arası geçiş</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Arabaların arasından geçmek. Türkiye'de yasak değil ama dikkatli yapılmalı.</p>
+                    </div>
+                    
+                    <!-- ATGATT -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">ATGATT</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Güvenlik</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">All The Gear, All The Time</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Her zaman tam ekipman. Kask, mont, eldiven, bot, pantolon. Güvenlik öncelik!</p>
+                    </div>
+                    
+                    <!-- ECE -->
+                    <div class="card">
+                        <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow);">ECE</h3>
+                            <span style="padding: 0.25rem 0.75rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px; color: var(--riders-yellow); font-size: 0.75rem;">Standart</span>
+                        </div>
+                        <p style="color: #d1d5db; font-weight: 500; margin-bottom: 0.75rem;">Economic Commission for Europe</p>
+                        <p style="color: #9ca3af; line-height: 1.6;">Avrupa kask güvenlik standardı. DOT'tan daha sıkı testler. Türkiye'de geçerli.</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <div style="display: inline-block; padding: 1rem 1.5rem; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 9999px;">
+                        <span style="color: var(--riders-yellow); font-weight: 500;">Toplam 20 terim gösteriliyor</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- SURUS ISARETLERI -->
+    <div id="page-surus-isaretleri" class="page-content">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content fade-in">
+                <div style="font-size: 6rem; margin-bottom: 2rem;">🤚</div>
+                <span class="hero-badge" style="background: rgba(255, 193, 7, 0.1); border-color: rgba(255, 193, 7, 0.3); color: var(--riders-yellow);">Güvenli İletişim</span>
+                <h1 style="font-size: 4rem; font-weight: 700; margin: 2rem 0;" class="gradient-text">SÜRÜŞ İŞARETLERİ</h1>
+                <p class="hero-subtitle">Yolda birbirimizle iletişim kurmak için kullandığımız el işaretleri. Her 68Rider bu işaretleri bilmeli.</p>
+            </div>
+        </section>
+        <section style="padding: 4rem 0; background: var(--riders-dark);">
+            <div class="container">
+                <div class="grid grid-2" style="max-width: 1000px; margin: 0 auto;">
+                    <div class="card">
+                        <img src="https://i.imgur.com/Hj4958f.jpeg" alt="Uluslararası El İşaretleri" style="width: 100%; border-radius: 8px; margin-bottom: 1rem; cursor: pointer;" onclick="openImageModal(this.src, 'Uluslararası El İşaretleri')" onerror="this.style.display='none'">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Uluslararası El İşaretleri</h3>
+                        <p style="color: #9ca3af;">Tüm dünyada geçerli standart motor el işaretleri</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://i.imgur.com/mQXRYQe.jpeg" alt="Türkiye El İşaretleri" style="width: 100%; border-radius: 8px; margin-bottom: 1rem; cursor: pointer;" onclick="openImageModal(this.src, 'Türkiye El İşaretleri')" onerror="this.style.display='none'">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Türkiye El İşaretleri</h3>
+                        <p style="color: #9ca3af;">Türkiye'de yaygın olarak kullanılan motor el işaretleri</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- IMAGE MODAL for Sürüş İşaretleri -->
+    <div id="modal-image" class="modal">
+        <div style="position: relative; max-width: 90vw; max-height: 90vh;">
+            <button class="modal-close" onclick="closeModal('image')" style="position: absolute; top: -50px; right: 0; z-index: 10;">✕</button>
+            <img id="modalImageSrc" src="" alt="" style="max-width: 100%; max-height: 90vh; border-radius: 12px; border: 4px solid var(--riders-yellow); box-shadow: 0 20px 60px rgba(255, 193, 7, 0.3);">
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent); padding: 2rem; border-radius: 0 0 12px 12px;">
+                <h3 id="modalImageTitle" style="font-size: 1.5rem; font-weight: 700; color: white;"></h3>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ILK YARDIM -->
+    <div id="page-ilk-yardim" class="page-content">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content fade-in">
+                <div style="font-size: 6rem; margin-bottom: 2rem;">🚑</div>
+                <span class="hero-badge" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Acil Durum Rehberi</span>
+                <h1 style="font-size: 4rem; font-weight: 700; margin: 2rem 0;" class="gradient-text">İLK YARDIM</h1>
+                <p class="hero-subtitle">Kaza anında hayat kurtarabilecek bilgiler. Her motorcunun bilmesi gereken temel ilk yardım.</p>
+            </div>
+        </section>
+        
+        <!-- Acil Numara -->
+        <section style="padding: 4rem 0; background: var(--riders-black);">
+            <div class="container">
+                <h2 class="section-title" style="color: #ef4444;">ACİL DURUM NUMARASI</h2>
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div class="card text-center" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.05)); border: 2px solid #ef4444;">
+                <div style="font-size: 6rem; margin-bottom: 1rem;">🚨</div>
+            <div style="font-size: 5rem; font-weight: 700; color: #ef4444; margin-bottom: 1rem;">112</div>
+        <div style="font-size: 1.5rem; color: white; font-weight: 600; margin-bottom: 1rem;">TÜM ACİL DURUMLAR</div>
+        <p style="color: #d1d5db; line-height: 1.8;">Ambulans, Polis, İtfaiye, Jandarma<br />Tüm acil durumlar için tek numara</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Kaza Anında Ne Yapmalı -->
+        <section style="padding: 4rem 0; background: var(--riders-dark);">
+            <div class="container">
+                <h2 class="section-title" style="color: #ef4444;">KAZA ANINDA NE YAPMALI?</h2>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 48px; height: 48px; background: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: white;">1</div>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: white;">Sakin Kal</h3>
+                        </div>
+                        <p style="color: #9ca3af; line-height: 1.8;">Panik yapmadan durumu değerlendir. Derin nefes al, etrafı kontrol et.</p>
+                    </div>
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 48px; height: 48px; background: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: white;">2</div>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: white;">Güvenliği Sağla</h3>
+                        </div>
+                        <p style="color: #9ca3af; line-height: 1.8;">Motorunu kapat, dörtlüleri yak. Mümkünse yaralıyı güvenli alana taşı.</p>
+                    </div>
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 48px; height: 48px; background: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: white;">3</div>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: white;">112'yi Ara</h3>
+                        </div>
+                        <p style="color: #9ca3af; line-height: 1.8;">Hemen 112'yi ara. Konumunu, yaralı sayısını ve durumu net anlat.</p>
+                    </div>
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 48px; height: 48px; background: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: white;">4</div>
+                            <h3 style="font-size: 1.5rem; font-weight: 700; color: white;">İlk Yardım Yap</h3>
+                        </div>
+                        <p style="color: #9ca3af; line-height: 1.8;">Ambulans gelene kadar temel ilk yardım uygula. Kaskı çıkarma!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Kalp Masajı -->
+        <section style="padding: 4rem 0; background: var(--riders-black);">
+            <div class="container">
+                <h2 class="section-title" style="color: #ef4444;">KALP MASAJI NASIL YAPILIR?</h2>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                            <div style="font-size: 4rem;">❤️</div>
+                            <div>
+                                <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">Hayat Kurtarıcı Bilgi</h3>
+                                <p style="color: #9ca3af;">Kalp durması durumunda yapılacaklar</p>
+                            </div>
+                        </div>
+                        <div style="color: #d1d5db; line-height: 1.8;">
+                            <p style="margin-bottom: 1rem;"><strong style="color: white;">1. Bilinci Kontrol Et:</strong> Omzuna dokun, "İyi misin?" diye sor. Yanıt yoksa 112'yi ara.</p>
+                            <p style="margin-bottom: 1rem;"><strong style="color: white;">2. Sert Zemine Yatır:</strong> Yaralıyı sırtüstü yatır, başını hafifçe geriye yatır.</p>
+                            <p style="margin-bottom: 1rem;"><strong style="color: white;">3. Göğüs Ortasına Bas:</strong> İki elin topuğunu göğsün ortasına koy. Kolların düz, dirseklerin kilitli.</p>
+                            <p style="margin-bottom: 1rem;"><strong style="color: white;">4. Basınç Uygula:</strong> Dakikada 100-120 kez, 5-6 cm derinliğinde bas. "Stayin' Alive" şarkısının ritmi gibi.</p>
+                            <p style="margin-bottom: 1rem;"><strong style="color: white;">5. Durmadan Devam Et:</strong> Ambulans gelene kadar ara vermeden devam et. Yorulursan başkası devam etsin.</p>
+                            <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 1rem; margin-top: 1.5rem;">
+                                <p style="color: white; font-weight: 600;">⚠️ ÖNEMLİ: Kaskı çıkarma! Sadece solunum yolu açıksa yeterli.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Kanama Kontrolü -->
+        <section style="padding: 4rem 0; background: var(--riders-dark);">
+            <div class="container">
+                <h2 class="section-title" style="color: #ef4444;">KANAMA NASIL DURDURULUR?</h2>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🩹</div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 1rem;">Hafif Kanama</h3>
+                        <ul style="color: #9ca3af; line-height: 1.8; list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.75rem;">✓ Temiz bez veya gazlı bezle bası</li>
+                            <li style="margin-bottom: 0.75rem;">✓ 10-15 dakika basınç uygula</li>
+                            <li style="margin-bottom: 0.75rem;">✓ Yaralı bölgeyi kalp hizasının üstünde tut</li>
+                            <li style="margin-bottom: 0.75rem;">✓ Kanama durursa temiz sargı sar</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🚨</div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 1rem;">Şiddetli Kanama</h3>
+                        <ul style="color: #9ca3af; line-height: 1.8; list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.75rem;">✓ Hemen 112'yi ara</li>
+                            <li style="margin-bottom: 0.75rem;">✓ Güçlü basınç uygula, bırakma</li>
+                            <li style="margin-bottom: 0.75rem;">✓ Yaralıyı yatır, bacaklarını kaldır</li>
+                            <li style="margin-bottom: 0.75rem;">✓ Turnike sadece son çare (kol/bacak kopması)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="max-width: 800px; margin: 2rem auto 0;">
+                    <div style="background: rgba(239, 68, 68, 0.1); border: 2px solid #ef4444; border-radius: 12px; padding: 1.5rem;">
+                        <h4 style="color: #ef4444; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">⚠️ YAPMA!</h4>
+                        <ul style="color: #d1d5db; line-height: 1.8; list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">❌ Yarayı suyla yıkama</li>
+                            <li style="margin-bottom: 0.5rem;">❌ Yarada kalan cismi çıkarma</li>
+                            <li style="margin-bottom: 0.5rem;">❌ Kirli bez kullanma</li>
+                            <li style="margin-bottom: 0.5rem;">❌ Turnike çok sıkı bağlama</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Şok Durumu -->
+        <section style="padding: 4rem 0; background: var(--riders-black);">
+            <div class="container">
+                <h2 class="section-title" style="color: #ef4444;">ŞOK DURUMU</h2>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div class="card">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 1.5rem;">Şok Belirtileri:</h3>
+                        <div class="grid grid-2" style="margin-bottom: 2rem;">
+                            <div>
+                                <p style="color: #9ca3af; margin-bottom: 0.5rem;">• Soluk, soğuk, nemli cilt</p>
+                                <p style="color: #9ca3af; margin-bottom: 0.5rem;">• Hızlı, zayıf nabız</p>
+                                <p style="color: #9ca3af; margin-bottom: 0.5rem;">• Hızlı, sığ solunum</p>
+                            </div>
+                            <div>
+                                <p style="color: #9ca3af; margin-bottom: 0.5rem;">• Baş dönmesi, halsizlik</p>
+                                <p style="color: #9ca3af; margin-bottom: 0.5rem;">• Bulantı, kusma</p>
+                                <p style="color: #9ca3af; margin-bottom: 0.5rem;">• Bilinç kaybı</p>
+                            </div>
+                        </div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 1rem;">Ne Yapmalı?</h3>
+                        <ul style="color: #d1d5db; line-height: 1.8; list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.75rem;">1. Yaralıyı sırtüstü yatır</li>
+                            <li style="margin-bottom: 0.75rem;">2. Bacaklarını 30 cm kaldır (kan beyne gitsin)</li>
+                            <li style="margin-bottom: 0.75rem;">3. Sıcak tut (mont, battaniye)</li>
+                            <li style="margin-bottom: 0.75rem;">4. Rahatlatmaya çalış, konuş</li>
+                            <li style="margin-bottom: 0.75rem;">5. Ambulans gelene kadar yanında kal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- İlk Yardım Çantası -->
+        <section style="padding: 4rem 0; background: var(--riders-dark);">
+            <div class="container">
+                <h2 class="section-title" style="color: #ef4444;">İLK YARDIM ÇANTASINDA OLMALI</h2>
+                <div class="grid grid-3">
+                    <div class="card text-center">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🩹</div>
+                        <h4 style="color: white; font-weight: 600; margin-bottom: 0.5rem;">Sargı Malzemeleri</h4>
+                        <p style="color: #9ca3af; font-size: 0.875rem;">Gazlı bez, flaster, elastik sargı, steril kompres</p>
+                    </div>
+                    <div class="card text-center">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">💊</div>
+                        <h4 style="color: white; font-weight: 600; margin-bottom: 0.5rem;">İlaçlar</h4>
+                        <p style="color: #9ca3af; font-size: 0.875rem;">Ağrı kesici, antiseptik, yanık merhemi</p>
+                    </div>
+                    <div class="card text-center">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">✂️</div>
+                        <h4 style="color: white; font-weight: 600; margin-bottom: 0.5rem;">Aletler</h4>
+                        <p style="color: #9ca3af; font-size: 0.875rem;">Makas, cımbız, eldiven, termometre</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- KURALLARIMIZ -->
+    <div id="page-kurallarimiz" class="page-content">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content fade-in">
+                <div style="font-size: 6rem; margin-bottom: 2rem;">⚖️</div>
+                <span class="hero-badge" style="background: rgba(255, 193, 7, 0.1); border-color: rgba(255, 193, 7, 0.3); color: var(--riders-yellow);">İlkelerimiz</span>
+                <h1 style="font-size: 4rem; font-weight: 700; margin: 2rem 0;" class="gradient-text">KURALLARIMIZ</h1>
+                <p class="hero-subtitle">68Riders ailesinin temel değerleri ve grup sürüş kuralları. Güvenlik ve kardeşlik önceliğimizdir.</p>
+            </div>
+        </section>
+        <section style="padding: 4rem 0; background: var(--riders-dark);">
+            <div class="container">
+                <div class="grid grid-4">
+                    <div class="card text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🤝</div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow); margin-bottom: 0.75rem;">Kardeşlik</h3>
+                        <p style="color: #9ca3af;">Birbirimize saygı, destek ve güven.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🛡️</div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow); margin-bottom: 0.75rem;">Güvenlik</h3>
+                        <p style="color: #9ca3af;">Güvenli sürüş her şeyden önce gelir.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">⚖️</div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow); margin-bottom: 0.75rem;">Saygı</h3>
+                        <p style="color: #9ca3af;">Birbirimize ve trafik kurallarına saygılıyız.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🎯</div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--riders-yellow); margin-bottom: 0.75rem;">Sorumluluk</h3>
+                        <p style="color: #9ca3af;">Sorumlu davranır, örnek oluruz.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- GALERI -->
+    <div id="page-galeri" class="page-content">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content fade-in">
+                <div style="font-size: 6rem; margin-bottom: 2rem;">📸</div>
+                <span class="hero-badge" style="background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3); color: #a855f7;">Anılarımız</span>
+                <h1 style="font-size: 4rem; font-weight: 700; margin: 2rem 0;" class="gradient-text">GALERİ</h1>
+                <p class="hero-subtitle">68Riders ailesinin en güzel anları. Sürüşler, etkinlikler, dostluklar ve unutulmaz hatıralar çok yakında!</p>
+                <a href="https://instagram.com/68_riders" target="_blank" class="btn btn-primary" style="margin-top: 2rem;">📸 Instagram'da Görün</a>
+            </div>
+        </section>
+    </div>
+
+    
+    <!-- ========== ILETISIM PAGE ========== -->
+    <div id="page-iletisim" class="page-content">
+        <section class="hero" style="min-height: 60vh;">
+            <div class="hero-bg"></div>
+            <div class="hero-content fade-in">
+                <span class="hero-badge" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3); color: #22c55e;">Bize Ulaşın</span>
+                <h1 class="hero-title"><span class="gradient-text">İLETİŞİM</span></h1>
+                <p class="hero-subtitle">68Riders ailesiyle iletişime geçin. Instagram'dan bize ulaşabilirsiniz!</p>
+            </div>
+        </section>
+        
+        <section style="padding: 8rem 0; background: var(--riders-dark);">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <!-- Instagram Card -->
+                    <div class="card" style="padding: 4rem 2rem;">
+                        <div style="font-size: 6rem; margin-bottom: 2rem;">📸</div>
+                        <h2 style="font-size: 3rem; font-weight: 700; color: white; margin-bottom: 1rem;">Instagram'da Bizi Takip Edin</h2>
+                        <p style="color: #9ca3af; font-size: 1.25rem; margin-bottom: 3rem; line-height: 1.8;">
+                            Güncel etkinliklerimiz, sürüş fotoğraflarımız ve duyurularımız için Instagram'da bizi takip edin. 
+                            Direkt mesaj ile bize ulaşabilirsiniz!
+                        </p>
+                        
+                        <a href="https://instagram.com/68_riders" target="_blank" style="display: inline-flex; align-items: center; gap: 1rem; padding: 1.5rem 3rem; background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; font-size: 1.5rem; font-weight: 700; text-decoration: none; border-radius: 12px; box-shadow: 0 20px 40px rgba(188, 24, 136, 0.3); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            <svg style="width: 32px; height: 32px;" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+                                <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                            @68_riders
+                        </a>
+                        
+                        <div style="margin-top: 3rem; padding-top: 3rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                            <p style="color: #6b7280; font-size: 0.875rem; margin-bottom: 1rem;">Diğer Sosyal Medya Hesaplarımız</p>
+                            <div style="display: flex; justify-content: center; gap: 1rem;">
+                                <a href="https://instagram.com/68_riders" target="_blank" style="width: 56px; height: 56px; background: var(--riders-gray); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.background='var(--riders-red)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.background='var(--riders-gray)'; this.style.transform='translateY(0)'">📸</a>
+                                <a href="https://youtube.com/@68riders" target="_blank" style="width: 56px; height: 56px; background: var(--riders-gray); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.background='var(--riders-red)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.background='var(--riders-gray)'; this.style.transform='translateY(0)'">🎬</a>
+                                <a href="https://tiktok.com/@68riders" target="_blank" style="width: 56px; height: 56px; background: var(--riders-gray); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.background='var(--riders-red)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.background='var(--riders-gray)'; this.style.transform='translateY(0)'">🎵</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bilgi Kartları -->
+                    <div class="grid grid-3" style="margin-top: 4rem;">
+                        <div class="card text-center">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">📍</div>
+                            <h3 style="color: white; font-weight: 600; margin-bottom: 0.5rem;">Konum</h3>
+                            <p style="color: #9ca3af;">Aksaray, Türkiye</p>
+                        </div>
+                        <div class="card text-center">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🏍️</div>
+                            <h3 style="color: white; font-weight: 600; margin-bottom: 0.5rem;">Üye Sayısı</h3>
+                            <p style="color: #9ca3af;">20 Aktif Üye</p>
+                        </div>
+                        <div class="card text-center">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">📅</div>
+                            <h3 style="color: white; font-weight: 600; margin-bottom: 0.5rem;">Kuruluş</h3>
+                            <p style="color: #9ca3af;">31 Aralık 2025</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Sıkça Sorulan Sorular -->
+                    <div style="margin-top: 6rem; text-align: left;">
+                        <h2 style="font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 3rem; text-align: center;">Sıkça Sorulan Sorular</h2>
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div class="card">
+                                <h3 style="color: var(--riders-red); font-weight: 600; margin-bottom: 0.75rem;">Nasıl üye olabilirim?</h3>
+                                <p style="color: #9ca3af; line-height: 1.8;">Instagram'dan @68_riders hesabımıza mesaj atarak üyelik başvurusu yapabilirsiniz. Sizinle iletişime geçeceğiz.</p>
+                            </div>
+                            <div class="card">
+                                <h3 style="color: var(--riders-red); font-weight: 600; margin-bottom: 0.75rem;">Üyelik ücreti var mı?</h3>
+                                <p style="color: #9ca3af; line-height: 1.8;">Hayır, 68Riders tamamen ücretsizdir. Sadece etkinliklerde kişisel harcamalarınız olabilir.</p>
+                            </div>
+                            <div class="card">
+                                <h3 style="color: var(--riders-red); font-weight: 600; margin-bottom: 0.75rem;">Hangi motor tiplerini kabul ediyorsunuz?</h3>
+                                <p style="color: #9ca3af; line-height: 1.8;">Tüm motor tiplerine açığız! Naked, sport, cruiser, enduro - hepsi aramızda. Önemli olan motor sevgisi ve kardeşlik.</p>
+                            </div>
+                            <div class="card">
+                                <h3 style="color: var(--riders-red); font-weight: 600; margin-bottom: 0.75rem;">Etkinlikler ne sıklıkta yapılıyor?</h3>
+                                <p style="color: #9ca3af; line-height: 1.8;">Genellikle hafta sonları sürüş ve etkinlikler düzenliyoruz. Duyurular Instagram'dan yapılıyor.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+                                    <option value="other">Diğer</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="display: block; font-size: 0.875rem; color: #9ca3af; margin-bottom: 0.5rem;">Mesajınız</label>
+                                <textarea required rows="5" style="width: 100%; padding: 0.75rem 1rem; background: var(--riders-dark); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: white; font-size: 1rem; resize: none;" placeholder="Mesajınızı buraya yazın..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Gönder</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="#" onclick="showPage('home')" style="display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; text-decoration: none;">
+                        <div style="width: 56px; height: 56px; background: linear-gradient(135deg, var(--riders-red), var(--riders-orange)); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <img src="/68riders.jpeg" alt="68Riders" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" onerror="this.parentElement.innerHTML='<span style=\'font-size:2rem;color:white;font-weight:700;\'>68</span>'">
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: white;">RIDERS</div>
+                            <div style="font-size: 0.625rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.3em;">Motorcu Topluluğu</div>
+                        </div>
+                    </a>
+                    <p style="color: #9ca3af; max-width: 400px; margin-bottom: 1.5rem; line-height: 1.6;">
+                        Sokağın ruhu, yolun kardeşliği. 68Riders olarak motosiklet tutkusunu paylaşan bir aile olduk.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/68_riders" target="_blank" class="social-link">📸</a>
+                        <a href="https://youtube.com/@68riders" target="_blank" class="social-link">🎬</a>
+                        <a href="https://tiktok.com/@68riders" target="_blank" class="social-link">🎵</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Hızlı Linkler</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showPage('hakkimizda')">Hakkımızda</a></li>
+                        <li><a href="#" onclick="showPage('uyeler')">Üyelerimiz</a></li>
+                        <li><a href="#" onclick="showPage('faaliyetler')">Faaliyetler</a></li>
+                        <li><a href="#" onclick="showPage('galeri')">Galeri</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Eğitim</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showPage('egitim')">Eğitim</a></li>
+                        <li><a href="#" onclick="showPage('sozluk')">Motor Sözlüğü</a></li>
+                        <li><a href="#" onclick="showPage('surus-isaretleri')">Sürüş İşaretleri</a></li>
+                        <li><a href="#" onclick="showPage('ilk-yardim')">İlk Yardım</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">İletişim</h4>
+                    <ul class="footer-links">
+                        <li style="display: flex; align-items: center; gap: 0.5rem; color: #9ca3af;"><span>📍</span><span>Aksaray, Türkiye</span></li>
+                        <li><a href="mailto:info@68riders.com">📧 info@68riders.com</a></li>
+                        <li><a href="tel:+905001234568">📱 +90 500 123 45 68</a></li>
+                        <li><a href="https://instagram.com/68_riders" target="_blank">📸 @68_riders</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 68Riders. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+    //<![CDATA[
+        // Üye verileri
+        const members = [
+            { id: 1, name: 'Burak', age: 19, bike: 'Ns200', image: 'https://i.imgur.com/T7uJHZt.png', instagram: 'https://instagram.com/burak' },
+            { id: 2, name: 'Ali', age: 18, bike: 'DRİFT L', image: 'https://i.imgur.com/0TLCd6a.jpeg', instagram: 'https://instagram.com/ali' },
+            { id: 3, name: 'Eren', age: 18, bike: 'Choper', image: 'https://i.imgur.com/rJitYkv.jpeg', instagram: 'https://instagram.com/eren' },
+            { id: 4, name: 'Furkan', age: 22, bike: 'TVS RİDER', image: 'https://i.imgur.com/4uDTuPa.jpeg', instagram: 'https://instagram.com/furkan' },
+            { id: 5, name: 'İsmail', age: 18, bike: 'Srk125 R', image: 'https://i.imgur.com/Qp3qM8O.jpeg', instagram: 'https://instagram.com/ismail' },
+            { id: 6, name: 'Tuğçe', age: 18, bike: 'Drift L', image: 'https://i.imgur.com/iEvbyUS.jpeg', instagram: 'https://instagram.com/tugce' },
+            { id: 7, name: 'Üye 7', age: 25, bike: 'Yamaha MT-07', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 8, name: 'Üye 8', age: 27, bike: 'Honda CB650R', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 9, name: 'Üye 9', age: 23, bike: 'Kawasaki Z400', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 10, name: 'Üye 10', age: 26, bike: 'Suzuki GSX-S750', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 11, name: 'Üye 11', age: 24, bike: 'KTM Duke 390', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 12, name: 'Üye 12', age: 28, bike: 'BMW G310R', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 13, name: 'Üye 13', age: 22, bike: 'Ducati Monster', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 14, name: 'Üye 14', age: 29, bike: 'Triumph Street Triple', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 15, name: 'Üye 15', age: 21, bike: 'Aprilia RS 660', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 16, name: 'Üye 16', age: 30, bike: 'Yamaha R6', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 17, name: 'Üye 17', age: 25, bike: 'Honda CBR500R', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 18, name: 'Üye 18', age: 27, bike: 'Kawasaki Ninja 650', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 19, name: 'Üye 19', age: 23, bike: 'Suzuki SV650', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 20, name: 'Üye 20', age: 26, bike: 'KTM RC 390', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 21, name: 'Üye 21', age: 24, bike: 'BMW S1000RR', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 22, name: 'Üye 22', age: 28, bike: 'Ducati Panigale V2', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 23, name: 'Üye 23', age: 22, bike: 'Triumph Daytona', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 24, name: 'Üye 24', age: 29, bike: 'Yamaha MT-09', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 25, name: 'Üye 25', age: 21, bike: 'Honda CB1000R', image: null, instagram: 'https://instagram.com/68_riders' }
+        ];
+        
+        // Üyeleri yükle
+        function loadMembers() {
+            const grid = document.getElementById('membersGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = members.map(member => `
+                <div class="card text-center" style="padding: 1.5rem; cursor: pointer;" onclick="showMemberModal(${member.id})">
+                    <div style="position: relative; margin-bottom: 1rem;">
+                        <div style="aspect-ratio: 1; border-radius: 12px; overflow: hidden; background: var(--riders-gray); border: 2px solid rgba(255, 107, 53, 0.3);">
+                            ${member.image ? 
+                                `<img src="${member.image}" alt="${member.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;font-size:3rem;\\'>🏍️</div>'">` :
+                                `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:3rem;">🏍️</div>`
+                            }
+                        </div>
+                        <div style="position: absolute; top: -8px; right: -8px; width: 32px; height: 32px; background: var(--riders-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.75rem; border: 2px solid var(--riders-dark);">#${member.id}</div>
+                    </div>
+                    <h3 style="font-size: 1.125rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">${member.name}</h3>
+                    <p style="color: #9ca3af; font-size: 0.875rem;">🎂 ${member.age} yaş</p>
+                    <p style="color: #9ca3af; font-size: 0.875rem;">🏍️ ${member.bike}</p>
+                </div>
+            `).join('');
+        }
+        
+        // Üye modal'ını göster
+        function showMemberModal(memberId) {
+            const member = members.find(m => m.id === memberId);
+            if (!member) return;
+            
+            document.getElementById('memberModalName').textContent = member.name;
+            document.getElementById('memberModalNumber').textContent = `#${member.id} Üye`;
+            document.getElementById('memberModalAge').textContent = `${member.age} yaş`;
+            document.getElementById('memberModalBike').textContent = member.bike;
+            document.getElementById('memberModalInstagram').href = member.instagram;
+            
+            const img = document.getElementById('memberModalImage');
+            if (member.image) {
+                img.src = member.image;
+                img.style.display = 'block';
+            } else {
+                img.style.display = 'none';
+            }
+            
+            openModal('member');
+        }
+        
+        // Sayfa yüklendiğinde üyeleri yükle
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMembers();
+        });
+
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+        
+        // Page navigation
+        function showPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const selectedPage = document.getElementById('page-' + pageName);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.remove('active');
+            
+            // Update URL hash
+            window.location.hash = pageName;
+        }
+        
+        // Handle initial page load with hash
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showPage(hash);
+            }
+        });
+        
+        // Modal functions
+        function openModal(modalName) {
+            const modal = document.getElementById('modal-' + modalName);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        function closeModal(modalName) {
+            const modal = document.getElementById('modal-' + modalName);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Close modal on background click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+        
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(card);
+        });
+        
+        // Logo update - Imgur linkleri kullan
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar logo
+            const navLogo = document.querySelector('.logo-img');
+            if (navLogo) {
+                navLogo.src = 'https://i.imgur.com/eOcxmye.jpeg';
+            }
+            
+            // Manifesto section logo
+            const manifestoImg = document.querySelector('img[alt="68Riders Logo"]');
+            if (manifestoImg) {
+                manifestoImg.src = 'https://i.imgur.com/eOcxmye.jpeg';
+            }
+        });
+        
+        // Image modal function for riding signals
+        function openImageModal(imageSrc, imageTitle) {
+            const modalImg = document.getElementById('modalImageSrc');
+            const modalTitle = document.getElementById('modalImageTitle');
+            
+            if (modalImg && modalTitle) {
+                modalImg.src = imageSrc;
+                modalTitle.textContent = imageTitle;
+                openModal('image');
+            }
+        }
+    //]]>
+    </script>
+</body>
+</html>
