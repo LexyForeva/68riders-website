@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -1859,24 +1859,23 @@
     
     <!-- ========== JAVASCRIPT ========== -->
     <script>
-    //<![CDATA[
         // Üye verileri
         const members = [
-            { id: 1, name: 'Burak', age: 19, bike: 'Ns200', image: 'https://i.imgur.com/T7uJHZt.png', instagram: 'https://instagram.com/burak' },
-            { id: 2, name: 'Ali', age: 18, bike: 'DRİFT L', image: 'https://i.imgur.com/0TLCd6a.jpeg', instagram: 'https://instagram.com/ali' },
+            { id: 1, name: 'Burak', age: 19, bike: 'Ns200', image: 'https://i.imgur.com/T7uJHZt.png', instagram: 'https://instagram.com/burakbytee' },
+            { id: 2, name: 'Ali', age: 18, bike: 'DRİFT L', image: 'https://i.imgur.com/0TLCd6a.jpeg', instagram: 'https://instagram.com/yilmaz6847y' },
             { id: 3, name: 'Eren', age: 18, bike: 'Choper', image: 'https://i.imgur.com/rJitYkv.jpeg', instagram: 'https://instagram.com/eren' },
-            { id: 4, name: 'Furkan', age: 22, bike: 'TVS RİDER', image: 'https://i.imgur.com/4uDTuPa.jpeg', instagram: 'https://instagram.com/furkan' },
+            { id: 4, name: 'Furkan', age: 22, bike: 'TVS RİDER', image: 'https://i.imgur.com/ElpRZgu.jpeg', instagram: 'https://instagram.com/_frknbrky_' },
             { id: 5, name: 'İsmail', age: 18, bike: 'Srk125 R', image: 'https://i.imgur.com/Qp3qM8O.jpeg', instagram: 'https://instagram.com/ismail' },
-            { id: 6, name: 'Tuğçe', age: 18, bike: 'Drift L', image: 'https://i.imgur.com/iEvbyUS.jpeg', instagram: 'https://instagram.com/tugce' },
-            { id: 7, name: 'Üye 7', age: 25, bike: 'Yamaha MT-07', image: null, instagram: 'https://instagram.com/68_riders' },
-            { id: 8, name: 'Üye 8', age: 27, bike: 'Honda CB650R', image: null, instagram: 'https://instagram.com/68_riders' },
-            { id: 9, name: 'Üye 9', age: 23, bike: 'Kawasaki Z400', image: null, instagram: 'https://instagram.com/68_riders' },
-            { id: 10, name: 'Üye 10', age: 26, bike: 'Suzuki GSX-S750', image: null, instagram: 'https://instagram.com/68_riders' },
-            { id: 11, name: 'Üye 11', age: 24, bike: 'KTM Duke 390', image: null, instagram: 'https://instagram.com/68_riders' },
-            { id: 12, name: 'Üye 12', age: 28, bike: 'BMW G310R', image: null, instagram: 'https://instagram.com/68_riders' },
-            { id: 13, name: 'Üye 13', age: 22, bike: 'Ducati Monster', image: null, instagram: 'https://instagram.com/68_riders' },
-            { id: 14, name: 'Üye 14', age: 29, bike: 'Triumph Street Triple', image: null, instagram: 'https://instagram.com/68_riders' },
-            { id: 15, name: 'Üye 15', age: 21, bike: 'Aprilia RS 660', image: null, instagram: 'https://instagram.com/68_riders' },
+            { id: 6, name: 'Tuğçe', age: 18, bike: 'Drift L', image: 'https://i.imgur.com/iEvbyUS.jpeg', instagram: 'https://instagram.com/tugcewss0' },
+            { id: 7, name: 'Eyüp', age: 22, bike: 'QJ SRK 400RR', image: 'https://i.imgur.com/PNjKbhR.jpeg', instagram: 'https://instagram.com/mr_eyupp' },
+            { id: 8, name: 'Selim', age: 19, bike: 'Honda CBR 250', image: 'https://i.imgur.com/Rw7ENFN.jpeg', instagram: 'https://instagram.com/selimcbr_68' },
+            { id: 9, name: 'Can', age: 17, bike: 'SRK 125R', image: 'https://i.imgur.com/vGv08zO.jpeg', instagram: 'https://instagram.com/zlaexsia' },
+            { id: 10, name: 'Kaan', age: 22, bike: 'MT-07', image: 'https://i.imgur.com/BdgObX3.jpeg', instagram: 'https://instagram.com/kaanwisiie' },
+            { id: 11, name: 'KaanAkça', age: 18, bike: 'ATV', image: 'https://i.imgur.com/aa3C4Gn.jpeg', instagram: 'https://instagram.com/kaganakcaa0' },
+            { id: 12, name: 'Oğuz', age: 22, bike: '250SR', image: 'https://i.imgur.com/et2023T.jpeg', instagram: 'https://instagram.com/ogzz.knt' },
+            { id: 13, name: 'Yusuf', age: 18, bike: 'Srk125 R', image: 'https://i.imgur.com/kNP1AVQ.jpeg', instagram: 'https://instagram.com/srk_yusuf80' },
+            { id: 14, name: 'Osman', age: 18, bike: 'Arora MT 125', image: 'https://i.imgur.com/Z9lfURk.jpeg', instagram: 'https://instagram.com/o.can2179' },
+            { id: 15, name: 'Mete', age: 21, bike: 'Tvs RİDER', image: 'https://i.imgur.com/3HHoARS.jpeg', instagram: 'https://instagram.com/mete_.68' },
             { id: 16, name: 'Üye 16', age: 30, bike: 'Yamaha R6', image: null, instagram: 'https://instagram.com/68_riders' },
             { id: 17, name: 'Üye 17', age: 25, bike: 'Honda CBR500R', image: null, instagram: 'https://instagram.com/68_riders' },
             { id: 18, name: 'Üye 18', age: 27, bike: 'Kawasaki Ninja 650', image: null, instagram: 'https://instagram.com/68_riders' },
@@ -2064,7 +2063,6 @@
                 openModal('image');
             }
         }
-    //]]>
     </script>
 </body>
 </html>
